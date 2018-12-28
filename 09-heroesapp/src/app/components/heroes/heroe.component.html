@@ -1,0 +1,82 @@
+<h3 class="spaceBottom">
+  Heroe <small>{{ heroe.nombre }}</small>
+</h3>
+<div class="row ">
+  <div class="col-sm-12 col-md-6">
+    <button
+      [routerLink]="['/']"
+      type="button"
+      class="btn btn-outline-danger spaceToOther"
+    >
+      <i class="fa fa-arrow-left"></i> Regresar
+    </button>
+  </div>
+  <div class="col-sm-12 col-md-6 text-right">
+    <button
+      *ngIf="!this.isNuevo"
+      (click)="agregarNuevo(forma)"
+      type="button"
+      class="btn btn-outline-success"
+    >
+      <i class="fa fa-plus-square"></i> Nuevo Heroe
+    </button>
+  </div>
+</div>
+<br />
+<div class="row animated fadeIn fast">
+  <div class="col-md-12">
+    <form (ngSubmit)="guardar()" #forma="ngForm">
+      <div class="form-group">
+        <label for="text">Nombre</label>
+        <input
+          [(ngModel)]="heroe.nombre"
+          type="text"
+          name="nombre"
+          class="form-control"
+          placeholder="Nombre del héroe"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="text">Casa</label>
+        <select
+          [(ngModel)]="heroe.casa"
+          name="casa"
+          class="form-control"
+          required
+        >
+          <option value="Marvel">Marvel</option>
+          <option value="DC">DC</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="text">Bio</label>
+        <textarea
+          [(ngModel)]="heroe.bio"
+          name="bio"
+          type="text"
+          placeholder="Bio"
+          class="form-control"
+        >
+        </textarea>
+      </div>
+
+      <div class="form-group">
+        <button
+          type="submit"
+          [disabled]="!forma.valid"
+          class="btn btn-outline-primary"
+        >
+          <i
+            [ngClass]="{ 'fa-save': this.isNuevo, 'fa-pencil': !this.isNuevo }"
+            class="fa"
+          ></i>
+          <span *ngIf="this.isNuevo"> Guardar cambios</span>
+          <span *ngIf="!this.isNuevo"> Actualizar</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+{{ forma.valid }}

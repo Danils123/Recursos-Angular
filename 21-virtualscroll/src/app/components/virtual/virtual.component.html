@@ -1,0 +1,23 @@
+<h1>Virtual Scroll</h1>
+<hr />
+
+<div class="row">
+  <div class="col-md-6" (click)="irFinal()">
+    <button class="btn btn-primary">Ir al final</button>
+  </div>
+  <div class="col-md-6 text-right" (click)="irInicio()">
+    <button class="btn btn-secondary">Ir al inicio</button>
+  </div>
+  <!-- <div class="col-md12"><button class="btn btn-primary"></button></div>
+  <div class="col-md12"><button class="btn btn-primary"></button></div>-->
+</div>
+<br />
+<cdk-virtual-scroll-viewport itemSize="10" class="list-container list-group ">
+  <div
+    class="list-group-item"
+    *cdkVirtualFor="let item of personas; let i = index; let conteo = count"
+    class="pulse animated list-group-item"
+  >
+    Item {{ i }} / {{ conteo }}
+  </div>
+</cdk-virtual-scroll-viewport>

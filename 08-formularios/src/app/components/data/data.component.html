@@ -1,0 +1,208 @@
+<h4>Formularios <small>template</small></h4>
+<p><strong class="text-danger">*</strong> Campos requeridos</p>
+<hr />
+<form [formGroup]="forma" (ngSubmit)="guardarCambios()" novalidate="novalidate">
+  <div formGroupName="nombreCompleto">
+    <div class="form-group row">
+      <label class="col-sm-12 col-md-2 col-form-label">
+        Nombre <strong class="text-danger">* </strong>
+      </label>
+      <div class="col-sm-12 col-md-8">
+        <input
+          class="form-control"
+          type="text"
+          placeholder="Nombre"
+          formControlName="nombre"
+          [ngClass]="{
+            'is-invalid':
+              !forma.get('nombreCompleto.nombre').valid &&
+              forma.get('nombreCompleto.nombre').touched,
+            'border border-success': forma.get('nombreCompleto.nombre').valid
+          }"
+        />
+        <div
+          class="invalid-feedback"
+          *ngIf="forma.get('nombreCompleto.nombre').errors?.required"
+        >
+          Este campo es requerido
+        </div>
+        <div
+          class="invalid-feedback"
+          *ngIf="forma.get('nombreCompleto.nombre').errors?.minlength"
+        >
+          Por lo menos de 3 caracteres
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-12 col-md-2 col-form-label">
+        Apellido <strong class="text-danger">*</strong></label
+      >
+      <div class="col-sm-12 col-md-8">
+        <input
+          class="form-control"
+          type="text"
+          placeholder="Apellido"
+          formControlName="apellido"
+          [ngClass]="{
+            'is-invalid':
+              !forma.get('nombreCompleto.apellido').valid &&
+              forma.get('nombreCompleto.apellido').touched,
+            'border border-success': forma.get('nombreCompleto.apellido').valid
+          }"
+        />
+        <div
+          class="invalid-feedback"
+          *ngIf="forma.get('nombreCompleto.apellido').errors?.required"
+        >
+          Este campo es requerido
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-12 col-md-2 col-form-label">
+      Correo <strong class="text-danger">*</strong></label
+    >
+    <div class=" col-sm-12 col-md-8">
+      <input
+        class="form-control"
+        type="email"
+        placeholder="Correo electrónico"
+        formControlName="correo"
+        [ngClass]="{
+          'is-invalid':
+            !forma.get('correo').valid && forma.get('correo').touched,
+          'border border-success': forma.get('correo').valid
+        }"
+      />
+      <div
+        class="invalid-feedback"
+        *ngIf="forma.get('correo').errors?.required"
+      >
+        Este campo es requerido
+      </div>
+      <div class="invalid-feedback" *ngIf="forma.get('correo').errors?.pattern">
+        El campo no tiene el formato de correo. Ejemplo: aaaa@aaa.com
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-12 col-md-2 col-form-label">Pasatiempos</label>
+    <div class=" col-sm-12 col-md-8" formArrayName="pasatiempos">
+      <input
+        *ngFor="
+          let pasatiempo of forma.controls['pasatiempos'].controls;
+          let i = index
+        "
+        [formControlName]="i"
+        type="text"
+        class="form-control"
+      />
+    </div>
+    <button
+      (click)="agregarPasatiempos()"
+      type="button"
+      class="btn btn-primary"
+    >
+      Nuevo
+    </button>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-12 col-md-2 col-form-label">
+      Username <strong class="text-danger">*</strong></label
+    >
+    <div class=" col-sm-12 col-md-8">
+      <input
+        class="form-control"
+        type="text"
+        placeholder="Username"
+        formControlName="username"
+        [ngClass]="{
+          'is-invalid':
+            !forma.get('username').valid && forma.get('username').touched,
+          'border border-success': forma.get('username').valid
+        }"
+      />
+      <div
+        class="invalid-feedback"
+        *ngIf="forma.get('username').errors?.required"
+      >
+        Este campo es requerido
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-12 col-md-2 col-form-label">
+      Password <strong class="text-danger">*</strong></label
+    >
+    <div class=" col-sm-12 col-md-8">
+      <input
+        class="form-control"
+        type="password"
+        placeholder="Password"
+        formControlName="password1"
+        [ngClass]="{
+          'is-invalid':
+            !forma.get('password1').valid && forma.get('password1').touched,
+          'border border-success': forma.get('password1').valid
+        }"
+      />
+      <div
+        class="invalid-feedback"
+        *ngIf="forma.get('password1').errors?.required"
+      >
+        Este campo es requerido
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-12 col-md-2 col-form-label">
+      Repetir contraseña <strong class="text-danger">*</strong></label
+    >
+    <div class=" col-sm-12 col-md-8">
+      <input
+        class="form-control"
+        type="password"
+        placeholder="Password"
+        formControlName="password2"
+        [ngClass]="{
+          'is-invalid':
+            !forma.get('password2').valid && forma.get('password2').touched,
+          'border border-success': forma.get('password2').valid
+        }"
+      />
+      <div
+        class="invalid-feedback"
+        *ngIf="forma.get('password2').errors?.required"
+      >
+        Este campo es requerido
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-12 col-md-2 col-form-label">&nbsp;</label>
+    <div class="input-group col-md-8">
+      <button
+        type="submit"
+        [disabled]="!forma.valid"
+        class="btn btn-outline-primary"
+      >
+        Guardar
+      </button>
+    </div>
+  </div>
+</form>
+
+<pre>
+  {{ forma.valid }}
+</pre>
+
+<br />
+{{ forma.status }}

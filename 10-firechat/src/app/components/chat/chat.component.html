@@ -1,0 +1,61 @@
+<h2>Chat</h2>
+<hr />
+
+<!-- <div class="app-mensajes" id="app-mensajes">
+  <div class="row">
+    <span>Daniel</span>
+    <p>ESte es un mensaje de chat</p>
+  </div>
+</div> -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="container">
+        <div class="chat">
+          <!-- chat-header -->
+          <div class="chat-header clearfix">
+            <img [src]="_cs.usuario.image" class="imgAvatar" alt="avatar" />
+            <div class="chat-about">
+              <div class="chat-with">
+                Mensajeando con {{ _cs.usuario.nombre }}
+              </div>
+              <div class="chat-num-messages">Muchos mensajes</div>
+            </div>
+            <i class="fa fa-star"></i>
+          </div>
+          <!-- end chat-header -->
+
+          <div class="chat-history" id="app-mensajes">
+            <div id="loader"><app-loaders></app-loaders></div>
+            <ul id="lista" hidden>
+              <li class="clearfix" *ngFor="let chat of _cs.chats">
+                <app-mensaje-chat [mensaje]="chat"></app-mensaje-chat>
+              </li>
+            </ul>
+          </div>
+          <!-- end chat-history -->
+
+          <div class="chat-message clearfix">
+            <textarea
+              type="text"
+              name="mensaje"
+              [(ngModel)]="mensaje"
+              (keyup.enter)="enviar_mensaje()"
+              id="message-to-send"
+              class="form-control"
+              placeholder="Type your message"
+            ></textarea>
+            <i class="fa fa-file-o"></i> &nbsp;&nbsp;&nbsp;
+            <i class="fa fa-file-image-o"></i>
+
+            <button (click)="enviar_mensaje()">
+              <i class="fa fa-paper-plane"></i> Enviar
+            </button>
+          </div>
+          <!-- end chat-message -->
+        </div>
+      </div>
+      <!-- end container -->
+    </div>
+  </div>
+</div>
